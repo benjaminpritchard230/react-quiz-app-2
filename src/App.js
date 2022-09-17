@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
+import UserAnswers from "./components/UserAnswers";
 
 function App() {
-  const questions = [
+  const [questions, setQuestions] = useState([
     {
       questionText: "What is the capital of France?",
       answerOptions: [
@@ -10,6 +11,7 @@ function App() {
         { answerText: "Paris", isCorrect: true },
         { answerText: "Dublin", isCorrect: false },
       ],
+      userAnswer: "Paris",
     },
     {
       questionText: "Who is CEO of Tesla?",
@@ -19,6 +21,7 @@ function App() {
         { answerText: "Bill Gates", isCorrect: false },
         { answerText: "Tony Stark", isCorrect: false },
       ],
+      userAnswer: "Elon Musk",
     },
     {
       questionText: "The iPhone was created by which company?",
@@ -28,6 +31,7 @@ function App() {
         { answerText: "Amazon", isCorrect: false },
         { answerText: "Microsoft", isCorrect: false },
       ],
+      userAnswer: "Microsoft",
     },
     {
       questionText: "How many Harry Potter books are there?",
@@ -37,8 +41,9 @@ function App() {
         { answerText: "6", isCorrect: false },
         { answerText: "7", isCorrect: true },
       ],
+      userAnswer: "4",
     },
-  ];
+  ]);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
@@ -50,6 +55,7 @@ function App() {
     } else {
       console.log("incorrect");
     }
+
     setCurrentQuestion(currentQuestion + 1);
   };
 
@@ -103,6 +109,7 @@ function App() {
         ) : (
           <div>
             <h1>{`You answered ${score} out of ${questions.length} questions correctly.`}</h1>
+            <UserAnswers questions={questions} />
             <button
               className="btn btn-primary"
               onClick={() => {
