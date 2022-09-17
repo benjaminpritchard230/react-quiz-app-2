@@ -69,20 +69,24 @@ function App() {
     <div className="container d-flex align-items-center justify-content-center">
       <div className="row">
         {currentQuestion < questions.length ? (
-          <div className="col-12 ">
-            <h1>{questions[currentQuestion].questionText}</h1>
+          <div class="container">
             <div className="row">
-              <div className="col-6">
+              <h1>{questions[currentQuestion].questionText}</h1>
+            </div>
+            <div class="row row-cols-2">
+              <div class="col">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary w-100 my-1"
                   onClick={() => {
                     handleClick(questions[currentQuestion].answerOptions[0]);
                   }}
                 >
                   {questions[currentQuestion].answerOptions[0].answerText}
                 </button>
+              </div>
+              <div class="col">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary w-100 my-1"
                   onClick={() => {
                     handleClick(questions[currentQuestion].answerOptions[1]);
                   }}
@@ -90,17 +94,19 @@ function App() {
                   {questions[currentQuestion].answerOptions[1].answerText}
                 </button>
               </div>
-              <div className="col-6">
+              <div class="col">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary w-100 my-1"
                   onClick={() => {
                     handleClick(questions[currentQuestion].answerOptions[2]);
                   }}
                 >
                   {questions[currentQuestion].answerOptions[2].answerText}
                 </button>
+              </div>
+              <div class="col">
                 <button
-                  className="btn btn-primary"
+                  className="btn btn-primary w-100 my-1"
                   onClick={() => {
                     handleClick(questions[currentQuestion].answerOptions[3]);
                   }}
@@ -109,8 +115,6 @@ function App() {
                 </button>
               </div>
             </div>
-
-            <p>{`Question ${currentQuestion + 1} of ${questions.length}.`}</p>
           </div>
         ) : (
           <div>
