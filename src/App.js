@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import UserAnswers from "./components/UserAnswers";
+import UserAnswersDisplay from "./components/UserAnswersDisplay";
 
 function App() {
   const [questions, setQuestions] = useState([
@@ -11,7 +11,7 @@ function App() {
         { answerText: "Paris", isCorrect: true },
         { answerText: "Dublin", isCorrect: false },
       ],
-      userAnswer: "Paris",
+      answer: "Paris",
     },
     {
       questionText: "Who is CEO of Tesla?",
@@ -21,7 +21,7 @@ function App() {
         { answerText: "Bill Gates", isCorrect: false },
         { answerText: "Tony Stark", isCorrect: false },
       ],
-      userAnswer: "Elon Musk",
+      answer: "Elon Musk",
     },
     {
       questionText: "The iPhone was created by which company?",
@@ -31,7 +31,7 @@ function App() {
         { answerText: "Amazon", isCorrect: false },
         { answerText: "Microsoft", isCorrect: false },
       ],
-      userAnswer: "Microsoft",
+      answer: "Apple",
     },
     {
       questionText: "How many Harry Potter books are there?",
@@ -41,12 +41,17 @@ function App() {
         { answerText: "6", isCorrect: false },
         { answerText: "7", isCorrect: true },
       ],
-      userAnswer: "4",
+      answer: "7",
     },
   ]);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
+  const [userAnswers, setUserAnswers] = useState([]);
+
+  useEffect(() => {
+    console.log(userAnswers);
+  }, [userAnswers]);
 
   const handleClick = (answer) => {
     if (answer.isCorrect === true) {
@@ -55,6 +60,7 @@ function App() {
     } else {
       console.log("incorrect");
     }
+    setUserAnswers([...userAnswers, answer.answerText]);
 
     setCurrentQuestion(currentQuestion + 1);
   };
@@ -109,12 +115,16 @@ function App() {
         ) : (
           <div>
             <h1>{`You answered ${score} out of ${questions.length} questions correctly.`}</h1>
-            <UserAnswers questions={questions} />
+            <UserAnswersDisplay
+              questions={questions}
+              userAnswers={userAnswers}
+            />
             <button
               className="btn btn-primary"
               onClick={() => {
                 setCurrentQuestion(0);
                 setScore(0);
+                setUserAnswers([]);
               }}
             >
               Try again!
